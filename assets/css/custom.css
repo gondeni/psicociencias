@@ -1,0 +1,320 @@
+﻿/*
+Verde 1: #104531
+Verde 2: #628a3a
+Naranja: #ebaa18
+*/
+/*------------------------------------
+  Colores
+------------------------------------*/
+.verde1 {
+    color: #104531 !important;
+}
+.verde2 {
+    color: #628a3a !important;
+}
+.naranja {
+    color: #ebaa18 !important;
+}
+/* Main Colors */
+.g-bg-main {
+  background-color: #fff !important;
+}
+
+/* Main Secondary */
+.g-bg-secondary {
+  background-color: #fafafa !important;
+}
+
+/* Primary Colors */
+.g-bg-primary {
+  background-color: #628a3a !important;
+}
+
+.g-bg-naranja {
+  background-color: #ebaa18 !important;
+}
+.g-brd-naranja {
+  border-color: #ebaa18 !important;
+}
+.g-bg-verde1 {
+  background-color: #104531 !important;
+}
+.g-brd-verde1 {
+  border-color: #104531 !important;
+}
+
+.g-bg-primary--hover:hover {
+  background-color: #104531 !important;
+}
+
+.g-color-primary {
+    color: #104531 !important;
+}
+.u-block-hover:hover .g-color-primary--hover, .g-color-primary--hover:hover {
+    color: #104531 !important;
+}
+.g-parent:hover .g-color-primary--parent-hover {
+    color: #104531 !important;
+}
+.g-color-primary--active.active {
+    color: #fff !important;
+}
+.active .g-color-primary--parent-active {
+    color: #fff !important;
+}
+.g-color-primary--before::before, .g-color-primary--after::after {
+    color: #fff;
+}
+/* Otros colores */
+.u-btn-primary {
+    color: #fff;
+    background-color: #628a3a;
+}
+
+/*------------------------------------
+  Textos
+------------------------------------*/
+.texto20 {
+    font-size: 20px;
+}
+
+/*------------------------------------
+  Cabecera
+------------------------------------*/
+.text-uppercase {
+     text-transform: none!important;
+}
+/* Barra superior */
+.g-bg-black {
+    background-color: #628a3a !important;
+}
+/* Menu */
+.marco-menu-psico {
+    margin: 0px;
+    padding: 0px;
+}
+.marco-menu-psico .menu-psico {
+    padding: 0px;
+}
+
+/* Navigation Style v3 */
+.navbar .u-main-nav-v3 .nav-link {
+    color: #333;
+    padding: 20px 15px 20px 5px;
+    border-bottom: 4px solid transparent;
+}
+.navbar .u-main-nav-v3 .nav-item.active > .nav-link,
+.navbar .u-main-nav-v3 .nav-item:hover > .nav-link,
+.navbar .u-main-nav-v3 .nav-item:focus > .nav-link,
+.navbar .u-main-nav-v3 .nav-item.show > .nav-link,
+.navbar .u-main-nav-v3 .nav-item.hs-sub-menu-opened > .nav-link,
+.navbar .u-main-nav-v3 .nav-item .nav-link:focus {
+    border-color: #628a3a;
+    background-color: #fafafa;
+}
+.navbar .u-main-nav-v1 .nav-item.hs-has-sub-menu > a, .navbar .u-main-nav-v1 .nav-item.hs-has-mega-menu > a, .navbar .u-main-nav-v1 .nav-item.dropdown > a, .navbar .u-main-nav-v2 .nav-item.hs-has-sub-menu > a, .navbar .u-main-nav-v2 .nav-item.hs-has-mega-menu > a, .navbar .u-main-nav-v2 .nav-item.dropdown > a, .navbar .u-main-nav-v3 .nav-item.hs-has-sub-menu > a, .navbar .u-main-nav-v3 .nav-item.hs-has-mega-menu > a, .navbar .u-main-nav-v3 .nav-item.dropdown > a, .navbar .u-main-nav-v4 .nav-item.hs-has-sub-menu > a, .navbar .u-main-nav-v4 .nav-item.hs-has-mega-menu > a, .navbar .u-main-nav-v4 .nav-item.dropdown > a, .navbar .u-main-nav-v5 .nav-item.hs-has-sub-menu > a, .navbar .u-main-nav-v5 .nav-item.hs-has-mega-menu > a, .navbar .u-main-nav-v5 .nav-item.dropdown > a, .navbar .u-main-nav-v6 .nav-item.hs-has-sub-menu > a, .navbar .u-main-nav-v6 .nav-item.hs-has-mega-menu > a, .navbar .u-main-nav-v6 .nav-item.dropdown > a, .navbar .u-main-nav-v7 .nav-item.hs-has-sub-menu > a, .navbar .u-main-nav-v7 .nav-item.hs-has-mega-menu > a, .navbar .u-main-nav-v7 .nav-item.dropdown > a, .navbar .u-main-nav-v8 .nav-item.hs-has-sub-menu > a, .navbar .u-main-nav-v8 .nav-item.hs-has-mega-menu > a, .navbar .u-main-nav-v8 .nav-item.dropdown > a, .navbar .u-main-nav-v9 .nav-item.hs-has-sub-menu > a, .navbar .u-main-nav-v9 .nav-item.hs-has-mega-menu > a {
+    padding-right: 5px;
+}
+.navbar .u-sub-menu-v3 .hs-sub-menu,
+.navbar .u-sub-menu-v3 .hs-mega-menu,
+.navbar .u-sub-menu-v3 .dropdown-menu {
+  border-top-color: #628a3a;
+  border-bottom-color: #777;
+}
+.navbar .u-sub-menu-v3 .hs-sub-menu a:hover, .navbar .u-sub-menu-v3 .dropdown-menu a:hover {
+    background-color: #628a3a;
+}
+
+/*------------------------------------
+  Contacto
+------------------------------------*/
+.item-contacto {
+    width: 100%;
+    font-size: 60px;
+}
+
+/*------------------------------------
+  Home
+------------------------------------*/
+.img-entidades {
+    width: 100%;
+    height: auto;
+}
+.fechaNoticia {
+    padding: 0px 0px 10px 0px;
+    font-size: 12px;
+}
+.leer-mas, .leer-mas > a, .leer-mas a {
+    color: #ebaa18;
+    text-align: right;
+    font-size: 12px;
+}
+.u-ns-bg-v1-top.g-bg-primary::before, .g-parent.g-bg-primary .u-ns-bg-v1-top::before {
+    border-bottom-color: #628a3a;
+}
+
+/* Icono de nosotros que rota */
+.icono-contenedor {
+    height: 140px;
+    margin: 0 auto 20px;
+    width: 140px;
+}
+.bg-icono {
+    height: 140px;
+    position: absolute;
+    top: 0px;
+    width: 140px;
+    z-index: 9;
+}
+.n2 {
+    background: url(../../imagenes/bg-icon.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.giraIcono {
+    -moz-transition: all 1.3s ease-in-out;
+    -webkit-transition: all 1.3s ease-in-out;
+    -o-transition: all 1.3s ease-in-out;
+    -ms-transition: all 1.3s ease-in-out;
+    transition: all 1.3s ease-in-out;
+}
+
+.cajita:hover .giraIcono {
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+.icono-interior {
+    -webkit-border-radius: 50%;
+    font-size: 72px;
+    height: 120px;
+    line-height: 134px;
+    margin-left: 10px;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    width: 120px;
+    z-index: 10;
+}
+
+/* Cursos */
+.article-cursos-home {
+    height: 100%;
+}
+.sombra-cursos-home {
+    height: 100%;
+}
+.titulo-cursos-home {
+    height: 55%;
+}
+.datos-cursos-home {
+    height: 45%;
+}
+.titulo_de_curso {
+  height: 130px;
+}
+
+/*------------------------------------
+  Pie
+------------------------------------*/
+.g-bg-black-opacity-0_9 {
+    background-color: #628a3a !important;
+}
+.g-bg-verde1 {
+    background-color: #104531 !important;
+}
+
+/*------------------------------------
+  Apaño para fila con 5 columnas
+------------------------------------*/
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+/* Banner de secciones */
+.dzsparallaxer.height-is-based-on-content {
+    height: 350px;
+    padding: 0 !important;
+}
+
+/* ----------------------------
+ Cursos
+ ----------------------------- */
+[class*="u-nav-v8"] .nav-link {
+  background-color: #104531;
+}
+
+[class*="u-nav-v8"] .nav-link .u-nav-v8__icon {
+  background-color: #104531;
+}
+
+.u-nav-v8-2 .nav-link::before {
+    background-image: linear-gradient(to bottom left, transparent 49.6%, #104531 50%), linear-gradient(to top left, transparent 49.6%, #104531 50%);
+}
+
+[class*="u-nav-v8"] .nav-link::after {
+    background-image: linear-gradient(to left, #104531 0%, rgba(17, 17, 17, 0.2) 100%);
+}
+
+[class*="u-nav-v8"] .nav-link.active {
+  background-color: #628a3a;
+}
+
+[class*="u-nav-v8"] .nav-link.active .u-nav-v8__icon {
+  background-color: #628a3a;
+}
+
+.u-nav-v8-2 .nav-link.active::before {
+  background-image: linear-gradient(to bottom left, transparent 49.6%, #628a3a 50%), linear-gradient(to top left, transparent 49.6%, #628a3a 50%);
+}
+
+.btn-matricula:hover {
+  word-spacing: 5px;
+}
+
+/* ----------------------------
+ Noticias
+ ----------------------------- */
+.u-pagination-v1-4:hover, .u-pagination-v1-4:focus {
+    color: #628a3a;
+    border-color: #628a3a;
+}
+
+.u-pagination-v1-4--active {
+    color: #fff;
+    background-color: #628a3a;
+    border-color: #628a3a;
+}
