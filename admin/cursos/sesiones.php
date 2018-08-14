@@ -3,15 +3,20 @@
     include ("../includes/config.php");
     
     $nombreDeEmpresa = $_SESSION["nombre_de_empresa"];
-    
+    $id_de_curso = $_POST['id_de_curso'];
     /* Se genera una matriz con las articulos  de la web */
-    $matrizDeCursos = array();
-    $consulta = "SELECT idDeCurso, nombreDeCurso, estado, modalidad ";
-    $consulta .= "FROM cursos ";
-    $consulta .= "ORDER BY modalidad ASC, nombreDeCurso ASC;";
-    foreach ($conexion->query($consulta, PDO::FETCH_ASSOC) as $curso) $matrizDeCursos[] = $curso;
 
+    $consulta = "SELECT * FROM `cursos` WHERE `iDDeCurso` = ".$id_de_curso."";
+    $hacerConsulta = $conexion->prepare($consulta);
+    $hacerConsulta->execute();
+    $curso = $hacerConsulta->fetch(PDO::FETCH_OBJ);
+
+    $consulta = "SELECT * FROM `sesiones` WHERE `id_de_curso` = ".$curso->{'idDeCurso'}."";
+    $hacerConsulta = $conexion->prepare($consulta);
+    $hacerConsulta->execute();
+    $sesiones = $hacerConsulta->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,16 +53,22 @@
 	  
         <!-- CONTENIDO PRINCIPAL -->
         <div class="right_col" role="main">
-          <div class="">
+          <div class="row">
             <div class="page-title">
               <div class="title_left">
-                <h3>Gesti&oacute;n de cursos</h3>
-                 <a href="nuevo_curso.php" class="btn btn-primary">Nueva curso</a>
+                <h3>Gesti&oacute;n de sesiones</h3>
+                 <a class="btn btn-primary" data-toggle="modal" data-target="#modalPrimario">Nueva sesión</a>
               </div>
             </div>
+          </div>
+          <br/>
+          <div class="row">
 
-            <div class="row">
-
+              <?php
+                if(empty($sesiones)){
+              ?>
+                <h3>No existen sesiones para el curso seleccionado.</h3>
+              <?php }else{ ?>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_content">
@@ -75,56 +86,30 @@
                       </thead>
                       
                       <tbody>
-                      <?php
-                        foreach($matrizDeCursos as $curso) {
-                          echo "<tr>";
-                          
-                          echo "<td>".$curso["nombreDeCurso"]."</td>";
-                          
-                          echo "<td>";
-                          if ($curso["modalidad"] == "P") {
-                            echo "Presencial";
-                          } elseif ($curso["modalidad"] == "D") {
-                            echo "On line";
-                          } elseif ($curso["modalidad"] ==  "A") {
-                            echo "P + D";
-                          } elseif ($curso["modalidad"] == "X") {
-                            echo "Máster";
-                          } else {
-                            echo "Sesiones";
-                          }
-                          echo "</td>";
-                          
-                          if ($curso["estado"] == "A") {
-                            echo "<td class=\"text-center\"><span class=\"label label-success\">Activo</span></td>";
-                          } else {
-                            echo "<td class=\"text-center\"><span class=\"label label-danger\">Inactivo</span></td>";
-                          }
-                          
-                          echo "<td class=\"text-center\">";
-                          echo "<input type=\"button\" value=\"Sesiones\" ";
-                          echo "onClick=\"javascript:saltarASesiones('".$curso["idDeCurso"]."');\" />";
-                          echo "</td>";                          
-                          echo "<td class=\"text-center\">";
-                          echo "<input type=\"button\" value=\"Modificar\" ";
-                          echo "onClick=\"javascript:saltarAModificarCurso('".$curso["idDeCurso"]."');\" />";
-                          echo "</td>";
-                          echo "<td class=\"text-center\">";
-                          echo "<input type=\"button\" value=\"Borrar\" ";
-                          echo "onClick=\"javascript:saltarABorrarCurso('".$curso["idDeCurso"]."');\" />";
-                          echo "</td>";
-                          echo "</tr>";
-                        }
-                      ?>
+
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-
+                <?php } ?>
             </div>
           </div>
-        </div>
+          <!-- Modal -->
+          <div class="modal" id="modalPrimario" aria-labelledby="modalLabel" data-backdrop="static" data-keyboard="true">
+            <div class="modal-dialog" id="dialogoModal">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="tituloDeModalPrimario">Nueva sesión></h4>
+                </div>
+                <div class="modal-body" id="cuerpoDeModalPrimario"></div>
+                <div class="modal-footer" id ="pieDeModalPrimario">
+                  <button type="button" id="bot_crear" class="btn btn-danger btn-sm pull-left hidden" onclick="nueva_sesion();" style="margin: 3px;">Crear</button>
+                  <button type="button" id="bot_cerrar" class="btn btn-default btn-sm pull-right" onclick="$('#modalPrimario').modal('hide')" style="margin: 3px;">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
         <!-- FIN CONTENIDO PRINCIPAL -->
 
           <?php include("../footer.php"); ?>  
@@ -148,6 +133,19 @@
       function inicializar(){
       }
       
+      function nueva_sesion(){
+
+        $.ajax({
+          type: "POST",
+          url: "auxiliar_sesiones.php",
+          data: $curso->{"idDeCurso"},
+          async: false,
+          success: function (){
+            location.reload();
+          }
+        });
+      }
+
       /* La siguiente funcion llama a la pagina de modificar articulo. */
       function saltarAModificarCurso(curso){
         document.getElementById("id_de_curso").value = curso;
@@ -155,10 +153,10 @@
         document.getElementById("formularioDeSalto").submit();
       }      
       
-      /* La siguiente funcion llama a la pagina de creacion de sesion. */
-      function saltarASesiones(curso){
+      /* La siguiente funcion llama a la pagina de creacion de cita. */
+      function saltarANuevaCita(curso){
         document.getElementById("id_de_curso").value = curso;
-        document.getElementById("formularioDeSalto").action = "sesiones.php";
+        document.getElementById("formularioDeSalto").action = "nueva_cita.php";
         document.getElementById("formularioDeSalto").submit();
       }
     
