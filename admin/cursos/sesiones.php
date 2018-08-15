@@ -1,6 +1,7 @@
 <?php
     header('Content-Type: text/html; charset=utf8');
     include ("../includes/config.php");
+    include ("../includes/formatear_fechas.php");
     
     $nombreDeEmpresa = $_SESSION["nombre_de_empresa"];
     $id_de_curso = $_POST['id_de_curso'];
@@ -11,10 +12,10 @@
     $hacerConsulta->execute();
     $curso = $hacerConsulta->fetch(PDO::FETCH_OBJ);
 
-    $consulta = "SELECT * FROM `sesiones` WHERE `id_de_curso` = ".$curso->{'idDeCurso'}."";
+    $consulta = "SELECT * FROM `sesiones` WHERE `id_de_curso` = ".$curso->{'idDeCurso'}." ORDER BY `fecha_de_sesion` DESC;";
     $hacerConsulta = $conexion->prepare($consulta);
     $hacerConsulta->execute();
-    $sesiones = $hacerConsulta->fetchAll(PDO::FETCH_ASSOC);
+    $sesiones = $hacerConsulta->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 <!DOCTYPE html>
@@ -38,9 +39,12 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- Colorpicker -->
+    <link href="../vendors/colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="../vendors/datepicker/css/bootstrap-datepicker3.css">
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-      
   </head>
 
   <body class="nav-md">
@@ -63,7 +67,7 @@
           </div>
           <br/>
           <div class="row">
-
+              <h4><?php echo $curso->{'nombreDeCurso'}?></h4>
               <?php
                 if(empty($sesiones)){
               ?>
@@ -76,17 +80,24 @@
                     <table id="secciones" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Nombre del curso</th>
-                          <th>Modalidad</th>
-                          <th class="text-center">Estado</th>
-                          <th>&nbsp;</th>
-                          <th>&nbsp;</th>
+                          <th>Fecha de la sesi&oacute;n</th>
+                          <th>Estado de la sesi&oacute;n</th>
                           <th>&nbsp;</th>
                         </tr>
                       </thead>
                       
                       <tbody>
-
+                        <?php
+                          foreach($sesiones as $sesion){
+                          ?>
+                          <tr>
+                            <td><?php echo formatear_fecha($sesion->{'fecha_de_sesion'},1)?></td>
+                            <td><?php echo $sesion->{'estado_de_sesion'}?></td>
+                            <td><i class="fa fa-trash borrar" onclick="borrar_sesion(this)" id="<?php echo $sesion->{'id_de_sesion'}?>" aria-hidden="true"></i></td>
+                          </tr>
+                          <?php
+                          }
+                        ?>
                       </tbody>
                     </table>
                   </div>
@@ -97,14 +108,27 @@
           </div>
           <!-- Modal -->
           <div class="modal" id="modalPrimario" aria-labelledby="modalLabel" data-backdrop="static" data-keyboard="true">
-            <div class="modal-dialog" id="dialogoModal">
+            <div class="modal-dialog modal-sm" id="dialogoModal">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title" id="tituloDeModalPrimario">Nueva sesión></h4>
+                  <h4 class="modal-title" id="tituloDeModalPrimario">Nueva sesión</h4>
                 </div>
-                <div class="modal-body" id="cuerpoDeModalPrimario"></div>
+                <div class="modal-body" id="cuerpoDeModalPrimario">
+                  <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                      <div class="form-group" id='fecha_de_sesion'>
+                        <label for="fecha_de_sesion">Fecha de sesión</label>
+                        <div class='input-group date fecha'>
+                          <input type='text' class="form-control input-sm" id='fecha_de_sesion' name="fecha_de_sesion"/>
+                          <span class="input-group-addon input-sm"> <i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                      </div>
+                  </div>
+                    <!-- <a href="#" class="btn btn-default" id="color_sesion">Elija color para la sesión</a> -->
+                  </div>
+                </div>
                 <div class="modal-footer" id ="pieDeModalPrimario">
-                  <button type="button" id="bot_crear" class="btn btn-danger btn-sm pull-left hidden" onclick="nueva_sesion();" style="margin: 3px;">Crear</button>
+                  <button type="button" id="bot_crear" class="btn btn-success btn-sm pull-left" onclick="nueva_sesion();" style="margin: 3px;">Crear</button>
                   <button type="button" id="bot_cerrar" class="btn btn-default btn-sm pull-right" onclick="$('#modalPrimario').modal('hide')" style="margin: 3px;">Cerrar</button>
                 </div>
               </div>
@@ -128,22 +152,100 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 
+    <!-- Colorpicker -->
+    <script src="../vendors/colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+
+    <!-- Datepicker -->
+    <script src="../vendors/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="../vendors/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
     <!-- Scripts personalizados -->
     <script language="javascript" type="text/javascript">
-      function inicializar(){
-      }
+
+      var hoy = new Date();
+      hoy = hoy.getDate() + "/" + (hoy.getMonth() + 1) + "/" + hoy.getFullYear();
+
+      $(document).ready(function () {
+
+          $('#datatable').dataTable();
+      
+          $('#datatable-responsive').DataTable();
+        
+          $('#datatable-fixed-header').DataTable({
+            fixedHeader: true
+          });
+    
+          // TableManageButtons.init();
+
+          $('#secciones').DataTable( {
+              "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
+              "pageLength": 50,
+              "ordering": false
+            } );
+
+          var handleDataTableButtons = function() {
+            if ($("#datatable-buttons").length) {
+                $("#datatable-buttons").DataTable({
+                  dom: "Bfrtip",
+                  responsive: true
+                });
+            }
+          };
+
+          $(function() {
+              $('#color_sesion').colorpicker().on('changeColor', function(e) {
+                  $('body')[0].style.backgroundColor = e.color.toString('rgba');
+              });
+          });
+
+            $("#fecha_de_sesion .input-group.date").datepicker({
+              format: "dd-mm-yyyy",
+              language: 'es',
+              autoclose: true,
+              todayHighlight: true,
+              startDate: hoy,
+            }).datepicker("setDate", hoy);
+            
+      });
+
+
       
       function nueva_sesion(){
+
+        var d = $("#fecha_de_sesion .input-group.date").datepicker("getDate");
+        // var fecha  =  ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + d.getFullYear();
+        var fecha  =  d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
 
         $.ajax({
           type: "POST",
           url: "auxiliar_sesiones.php",
-          data: $curso->{"idDeCurso"},
+          data: {opt:'nuevo',id_de_curso:'<?php echo $curso->{"idDeCurso"}?>',fecha:fecha},
           async: false,
-          success: function (){
-            location.reload();
+          success: function (data){
+            console.log(data);
+            if(data=='true'){
+              location.reload();
+            }else{
+              alert("La fecha para la cita del curso ya existe. Por favor, elija otra.");
+            }
           }
         });
+      }
+
+      //Recibe el elemento del html, del cual extraeremos el ID que nos interesa
+      function borrar_sesion(e){
+        var txt;
+        var r = confirm("Va a borrar la sesión");
+        if (r == true) {
+          $.ajax({
+            type: "POST",
+            url: "auxiliar_sesiones.php",
+            data: {opt:'borrar',id_de_sesion:e.id},
+            async: false,
+            success: function (data){
+              location.reload();
+            }
+          });
+        }
       }
 
       /* La siguiente funcion llama a la pagina de modificar articulo. */
@@ -169,44 +271,6 @@
         }
       }
 
-      /* Datatables */
-      $(document).ready(function() {
-          $('#secciones').DataTable( {
-            "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
-            "pageLength": 50,
-            "ordering": false
-          } );
-      } );
-      
-      $(document).ready(function() {
-        var handleDataTableButtons = function() {
-          if ($("#datatable-buttons").length) {
-              $("#datatable-buttons").DataTable({
-                dom: "Bfrtip",
-                responsive: true
-              });
-          }
-        };
-    
-        $('#datatable').dataTable();
-      
-        $('#datatable-responsive').DataTable();
-      
-        $('#datatable-fixed-header').DataTable({
-          fixedHeader: true
-        });
-      
-        TableManageButtons.init();
-      });
-
     </script>
-
-    <!-- Formulario para modificar o borrar -->
-    <form action="" id="formularioDeSalto" method="post">
-            <input type="hidden" name="<?php echo session_name(); ?>" value="<?php echo session_id(); ?>" />
-            <input type="hidden" name="id_de_curso" id="id_de_curso" value="" />
-    </form>
-     <!-- /Formulario para modificar o borrar -->
-
   </body>
 </html>
