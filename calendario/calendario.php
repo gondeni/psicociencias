@@ -48,12 +48,12 @@ include('../includes/config_ini.php');
 
   <style>
 
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-    font-size: 14px;
-  }
+  /* body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+  font-size: 14px;
+  } */
 
   #script-warning {
     display: none;
@@ -87,7 +87,9 @@ include('../includes/config_ini.php');
 <body>
   <main>
 
-    <?php include ("../cabecera.php"); ?>
+    <?php
+    include ("../cabecera.php");
+    ?>
 
     <div id='script-warning'>
       <code>php/get-events.php</code> must be running.

@@ -1,6 +1,6 @@
     <!-- Header -->
     <header id="js-header" class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance" data-header-fix-moment="300">
-            
+
       <!-- Menu -->
       <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-py-10 g-py-0--lg marco-menu-psico" data-header-fix-moment-classes="u-shadow-v18">
         <nav class="js-mega-menu navbar navbar-expand-lg py-0 menu-psico">
@@ -23,7 +23,7 @@
             <!-- Navigation -->
             <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
               <ul class="navbar-nav ml-auto text-uppercase g-font-weight-600 u-main-nav-v3 u-sub-menu-v3">
-                
+
                 <li class="nav-item hs-has-sub-menu g-mx-2--md g-mx-5--xl g-mb-5 g-mb-0--lg">
                   <a href="#!" class="nav-link" id="nav-link-1" aria-haspopup="true" aria-expanded="false" aria-controls="nav-submenu-1">NOSOTROS</a>
                   <!-- Submenu -->
@@ -43,7 +43,7 @@
                   </ul>
                   <!-- End Submenu -->
                 </li>
-                
+
                 <li class="nav-item hs-has-sub-menu g-mx-2--md g-mx-5--xl g-mb-5 g-mb-0--lg">
                   <a href="!#" class="nav-link" id="nav-link-1" aria-haspopup="true" aria-expanded="false" aria-controls="nav-submenu-1">MÁSTER</a>
                   <!-- Submenu -->
@@ -60,27 +60,27 @@
                   </ul>
                   <!-- End Submenu -->
                 </li>
-                
+
                 <li class="nav-item g-mx-2--md g-mx-5--xl g-mb-5 g-mb-0--lg">
                   <a href="../formacion/experto.php" class="nav-link">CURSOS DE EXPERTO</a>
                 </li>
-                
+
                 <li class="nav-item g-mx-2--md g-mx-5--xl g-mb-5 g-mb-0--lg">
                   <a href="../formacion/fcontinua.php" class="nav-link">FORMACIÓN CONTÍNUA</a>
                 </li>
-                
+
                 <li class="nav-item g-mx-2--md g-mx-5--xl g-mb-5 g-mb-0--lg">
                   <a href="../noticias/noticias.php" class="nav-link">NOTICIAS</a>
                 </li>
-                
+
                 <li class="nav-item g-mx-2--md g-mx-5--xl g-mb-5 g-mb-0--lg">
                   <a href="#!" class="nav-link">REVISTA DIGITAL</a>
                 </li>
-                
+
                 <li class="nav-item g-mx-2--md g-mx-5--xl g-mb-5 g-mb-0--lg">
                   <a href="../contacto/contacto.php" class="nav-link">CONTACTO</a>
                 </li>
-                
+
               </ul>
             </div>
             <!-- End Navigation -->
@@ -92,14 +92,14 @@
 
     </header>
     <!-- End Header -->
-    
+
     <div style="margin-bottom:50px;">&nbsp;</div>
-    
+
     <!-- Formulario de salto -->
     <form action="" id="formularioDeSalto" method="post">
         <input type="hidden" name="id_de_curso" id="id_de_curso" value="" />
     </form>
-    
+
     <script>
         // Paso a curso individual
 		function saltarACurso (id) {
