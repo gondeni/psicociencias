@@ -2,18 +2,19 @@
 	header('Content-Type: text/html; charset=utf8');
 	include ("../includes/config.php");
 	include_once ("../includes/funciones_auxiliares.php"); //Se incluyen las funciones auxiliares, una sola vez.
-	
+
 	$nombreDeEmpresa = $_SESSION["nombre_de_empresa"];
-	
-	/* Se establece la página de retorno */
+
+	/* Se establece la pï¿½gina de retorno */
 	$paginaDeRetorno = "cursos.php";
-	
-	/* Se recogen las variables que vienen de la página de alta */
+
+	/* Se recogen las variables que vienen de la pï¿½gina de alta */
 	$id_de_curso = $_POST["id_de_curso"];
 	$nombre_de_curso = htmlentities($_POST["nombre_de_curso"]);
 	$id_de_seccion = $_POST["id_de_seccion"];
 	$descripcion_de_curso = $_POST["descripcion_de_curso"];
 	$modalidad_de_curso = $_POST["modalidad_de_curso"];
+	$color_calendario = $_POST["color_calendario"];
 	$id_de_sede = $_POST["id_de_sede"];
 	$sesiones_de_curso = $_POST["sesiones_de_curso"];
 	$fechas_de_curso = $_POST["fechas_de_curso"];
@@ -34,10 +35,10 @@
 	$orden_de_curso = $_POST["orden_de_curso"];
 	$estado_de_curso = $_POST["estado_de_curso"];
 
-	/* Solo se nmodificará la imagen en caso de que se maruqe para borra o venga una nueva. */
-	if ($_FILES["imagen_de_curso"]["size"] == 0 && !isset($_POST["borrar_imagen"])) { // Si no se recibe imagen ni se ha marcado su eliminación
+	/* Solo se nmodificarï¿½ la imagen en caso de que se maruqe para borra o venga una nueva. */
+	if ($_FILES["imagen_de_curso"]["size"] == 0 && !isset($_POST["borrar_imagen"])) { // Si no se recibe imagen ni se ha marcado su eliminaciï¿½n
 			$nombreDeImagen = $_POST["imagen_actual"];
-		} elseif($_FILES["imagen_de_curso"]["size"] == 0 && $_POST["borrar_imagen"] == "on") { // Si no se recibe imagen pero si se marca su eliminación
+		} elseif($_FILES["imagen_de_curso"]["size"] == 0 && $_POST["borrar_imagen"] == "on") { // Si no se recibe imagen pero si se marca su eliminaciï¿½n
 			$nombreDeImagen = "";
 		} else { // Si llega una imagen nueva
 			$nombreDeImagen = str_replace($caracteresProhibidos, $caracteresSustitutos, $_FILES["imagen_de_curso"]["name"]);
@@ -62,7 +63,7 @@
 			}
 		}
 
-	
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,16 +85,16 @@
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
     <!-- Ckeditor -->
-    <script src="../includes/ckeditor/ckeditor.js"></script>  
-      
+    <script src="../includes/ckeditor/ckeditor.js"></script>
+
   </head>
 
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
-          
-          <?php include("../menu.php"); ?>  
+
+          <?php include("../menu.php"); ?>
           <?php include("../menu_top.php"); ?>
 
           <!-- CONTENIDO PRINCIPAL -->
@@ -110,16 +111,17 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_content">
-	
+
 											<?php
 
 												/* Se define la consulta SQL */
 												$consulta = "UPDATE cursos SET ";
-												
+
 												$consulta .= "nombreDeCurso = :nombreDeCurso, ";
 												$consulta .= "idDeSeccion = :idDeSeccion, ";
 												$consulta .= "descripcionDeCurso = :descripcionDeCurso, ";
 												$consulta .= "modalidad = :modalidadDeCurso, ";
+												$consulta .= "color_calendario = :color_calendario, ";
 												$consulta .= "sede = :idDeSede, ";
 												$consulta .= "sesionesPresenciales = :sesionesDeCurso, ";
 												$consulta .= "fechas = :fechasDeCurso, ";
@@ -140,40 +142,41 @@
 												$consulta .= "orden = :ordenDeCurso, ";
 												$consulta .= "estado = :estadoDeCurso, ";
 												$consulta .= "banner = :bannerDeCurso ";
-												
+
 												$consulta .= "WHERE idDeCurso = :idDeCurso;";
-													
+
 												$hacerConsulta = $conexion->prepare($consulta); // Se crea un objeto PDOStatement.
-												$hacerConsulta->bindParam(":idDeCurso", $id_de_curso); 
-												$hacerConsulta->bindParam(":nombreDeCurso", $nombre_de_curso); 
+												$hacerConsulta->bindParam(":idDeCurso", $id_de_curso);
+												$hacerConsulta->bindParam(":nombreDeCurso", $nombre_de_curso);
 												$hacerConsulta->bindParam(":idDeSeccion", $id_de_seccion);
 												$hacerConsulta->bindParam(":descripcionDeCurso", $descripcion_de_curso);
 												$hacerConsulta->bindParam(":modalidadDeCurso", $modalidad_de_curso);
+												$hacerConsulta->bindParam(":color_calendario", $modalidad_de_curso);
 												$hacerConsulta->bindParam(":idDeSede", $id_de_sede);
-												$hacerConsulta->bindParam(":sesionesDeCurso", $sesiones_de_curso); 
-												$hacerConsulta->bindParam(":fechasDeCurso", $fechas_de_curso); 
-												$hacerConsulta->bindParam(":horariosDeCurso", $horarios_de_curso); 
-												$hacerConsulta->bindParam(":fichaMaster", $ficha_master); 
-												$hacerConsulta->bindParam(":tituloTab1", $tituloTab1); 
-												$hacerConsulta->bindParam(":tituloTab2", $tituloTab2); 
-												$hacerConsulta->bindParam(":tituloTab3", $tituloTab3); 
-												$hacerConsulta->bindParam(":tituloTab4", $tituloTab4); 
-												$hacerConsulta->bindParam(":tituloTab5", $tituloTab5); 
-												$hacerConsulta->bindParam(":tituloTab6", $tituloTab6); 
-												$hacerConsulta->bindParam(":contenidoTab1", $contenidoTab1); 
-												$hacerConsulta->bindParam(":contenidoTab2", $contenidoTab2); 
-												$hacerConsulta->bindParam(":contenidoTab3", $contenidoTab3); 
-												$hacerConsulta->bindParam(":contenidoTab4", $contenidoTab4); 
-												$hacerConsulta->bindParam(":contenidoTab5", $contenidoTab5); 
-												$hacerConsulta->bindParam(":contenidoTab6", $contenidoTab6); 
-												$hacerConsulta->bindParam(":ordenDeCurso", $orden_de_curso); 
-												$hacerConsulta->bindParam(":estadoDeCurso", $estado_de_curso); 
-												$hacerConsulta->bindParam(":bannerDeCurso", $nombreDeImagen); 
+												$hacerConsulta->bindParam(":sesionesDeCurso", $sesiones_de_curso);
+												$hacerConsulta->bindParam(":fechasDeCurso", $fechas_de_curso);
+												$hacerConsulta->bindParam(":horariosDeCurso", $horarios_de_curso);
+												$hacerConsulta->bindParam(":fichaMaster", $ficha_master);
+												$hacerConsulta->bindParam(":tituloTab1", $tituloTab1);
+												$hacerConsulta->bindParam(":tituloTab2", $tituloTab2);
+												$hacerConsulta->bindParam(":tituloTab3", $tituloTab3);
+												$hacerConsulta->bindParam(":tituloTab4", $tituloTab4);
+												$hacerConsulta->bindParam(":tituloTab5", $tituloTab5);
+												$hacerConsulta->bindParam(":tituloTab6", $tituloTab6);
+												$hacerConsulta->bindParam(":contenidoTab1", $contenidoTab1);
+												$hacerConsulta->bindParam(":contenidoTab2", $contenidoTab2);
+												$hacerConsulta->bindParam(":contenidoTab3", $contenidoTab3);
+												$hacerConsulta->bindParam(":contenidoTab4", $contenidoTab4);
+												$hacerConsulta->bindParam(":contenidoTab5", $contenidoTab5);
+												$hacerConsulta->bindParam(":contenidoTab6", $contenidoTab6);
+												$hacerConsulta->bindParam(":ordenDeCurso", $orden_de_curso);
+												$hacerConsulta->bindParam(":estadoDeCurso", $estado_de_curso);
+												$hacerConsulta->bindParam(":bannerDeCurso", $nombreDeImagen);
 												$hacerConsulta->execute(); // Se ejecuta la consulta.
 												$hacerConsulta->closeCursor(); // Se libera el recurso.
-												
+
 											?>
-		    
+
 										<div class="row">
 											<div class="col-md-2 col-sm-4 col-xs-12">.<img src="../imagenes/info.jpg" alt="info" class="img-rounded"></div>
 											<div class="col-md-10 col-sm-8 col-xs-12">
@@ -181,11 +184,11 @@
 												<?php echo "<h2>Se ha grabado correctamente el art&iacute;culo del cat&aacute;logo.</h2>"; ?>
 											</div>
 										</div>
-										
+
 										<div class="row">
                         <br /><br /><br />&nbsp;&nbsp;<a href="catalogo.php" class="btn btn-primary">Aceptar</a>
 										</div>
-										
+
                   </div>
                 </div>
               </div>
@@ -195,7 +198,7 @@
         </div>
         <!-- FIN CONTENIDO PRINCIPAL -->
 
-          <?php include("../footer.php"); ?>  
+          <?php include("../footer.php"); ?>
 
       </div>
     </div>
@@ -212,7 +215,7 @@
     <script src="../vendors/validator/validator.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    
+
     <!-- validator -->
     <script>
       // initialize the validator function
