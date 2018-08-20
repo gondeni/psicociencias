@@ -916,156 +916,93 @@ include('../includes/config_ini.php');
         $(".corte").hide();
       }
 
-      /* Funciones para el formulario */
+      function comprobar_paso_1(){
 
-      function comprobarFormulario() {
         document.getElementById("apellidos").value = document.getElementById("apellidos").value.trim();
         if (document.getElementById("apellidos").value == "") {
           alert("El apellido no puede estar en blanco.");
           document.getElementById("apellidos").focus();
-
-          pre_focus();
-          $("#apellidos").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("nombre").value = document.getElementById("nombre").value.trim();
         if (document.getElementById("nombre").value == "") {
           alert("El nombre no puede estar en blanco.");
           document.getElementById("nombre").focus();
-
-          pre_focus();
-          $("#nombre").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("fechaNac").value = document.getElementById("fechaNac").value.trim();
         if (document.getElementById("fechaNac").value == "") {
           alert("La fecha de nacimiento no puede estar en blanco.");
           document.getElementById("fechaNac").focus();
-
-          pre_focus();
-          $("#fechaNac").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("nacionalidad").value = document.getElementById("nacionalidad").value.trim();
         if (document.getElementById("nacionalidad").value == "") {
           alert("La nacionalidad no puede estar en blanco.");
           document.getElementById("nacionalidad").focus();
-
-          pre_focus();
-          $("#nacionalidad").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("domicilio").value = document.getElementById("domicilio").value.trim();
         if (document.getElementById("domicilio").value == "") {
           alert("El domicilio no puede estar en blanco.");
           document.getElementById("domicilio").focus();
-
-          pre_focus();
-          $("#domicilio").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("ciudad").value = document.getElementById("ciudad").value.trim();
         if (document.getElementById("ciudad").value == "") {
           alert("La ciudad no puede estar en blanco.");
           document.getElementById("ciudad").focus();
-
-          pre_focus();
-          $("#ciudad").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("provincia").value = document.getElementById("provincia").value.trim();
         if (document.getElementById("provincia").value == "") {
           alert("La provincia no puede estar en blanco.");
           document.getElementById("provincia").focus();
-
-          pre_focus();
-          $("#provincia").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("cp").value = document.getElementById("cp").value.trim();
         if (document.getElementById("cp").value == "") {
           alert("El codigo postal no puede estar en blanco.");
           document.getElementById("cp").focus();
-
-          pre_focus();
-          $("#cp").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("dni").value = document.getElementById("dni").value.trim();
         if (document.getElementById("dni").value == "") {
           alert("El DNI / Pasaporte no puede estar en blanco.");
           document.getElementById("dni").focus();
-
-          pre_focus();
-          $("#dni").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("movil").value = document.getElementById("movil").value.trim();
         if (document.getElementById("movil").value == "") {
           alert("El telefono movil no puede estar en blanco.");
           document.getElementById("movil").focus();
-
-          pre_focus();
-          $("#movil").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("mail").value = document.getElementById("mail").value.trim();
         if (document.getElementById("mail").value == "") {
           alert("El email no puede estar en blanco.");
           document.getElementById("mail").focus();
-
-          pre_focus();
-          $("#mail").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("grado").value = document.getElementById("grado").value.trim();
         if (document.getElementById("grado").value == "") {
           alert("La Licenciatura / Grado no puede estar en blanco.");
           document.getElementById("grado").focus();
-
-          pre_focus();
-          $("#grado").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("fin").value = document.getElementById("fin").value.trim();
         if (document.getElementById("fin").value == "") {
           alert("la fecha de fin no puede estar en blanco.");
           document.getElementById("fin").focus();
-
-          pre_focus();
-          $("#fin").parents("div").find(".corte").show();
           return false;
         }
         document.getElementById("especialidad").value = document.getElementById("especialidad").value.trim();
         if (document.getElementById("especialidad").value == "") {
           alert("La especialidad no puede estar en blanco.");
           document.getElementById("especialidad").focus();
+          return false;
+        }
 
-          pre_focus();
-          $("#especialidad").parents("div").find(".corte").show();
-          return false;
-        }
-        document.getElementById("dia").value = document.getElementById("dia").value.trim();
-        if (document.getElementById("dia").value == "") {
-          alert("La fecha de ingreso no puede estar en blanco.");
-          document.getElementById("dia").focus();
-
-          pre_focus();
-          $("#dia").parents("div").find(".corte").show();
-          return false;
-        }
-        opciones = document.getElementsByName("pago");
-        var seleccionado = false;
-        for(var i=0; i<opciones.length; i++) {
-          if(opciones[i].checked) {
-            seleccionado = true;
-            break;
-          }
-        }
-        if(!seleccionado) {
-          alert("La modalidad de pago no puede estar en blanco.");
-          return false;
-        }
         var foto =  document.getElementById("f_foto").value;
         if (foto == "" ) {
           alert("Por favor, adjunte la fotografia solicitada");
@@ -1096,6 +1033,55 @@ include('../includes/config_ini.php');
           alert("El formato del Titulo no es pdf");
           return false;
         }
+
+
+        return true;
+      }
+
+      function comprobar_paso_2(){
+
+        document.getElementById("dia").value = document.getElementById("dia").value.trim();
+        if (document.getElementById("dia").value == "") {
+          alert("La fecha de ingreso no puede estar en blanco.");
+          document.getElementById("dia").focus();
+          return false;
+        }
+
+        var matricula =  document.getElementById("f_matricula").value;
+        if (matricula == "" ) {
+          alert("Por favor, adjunte el justificante solicitado");
+          return false;
+        }
+        var formatoMatricula =  (matricula.substring(matricula.lastIndexOf("."))).toLowerCase();
+        if (formatoMatricula != ".pdf") {
+          alert("El formato del justificante no es pdf");
+          return false;
+        }
+
+        opciones = document.getElementsByName("pago");
+        var seleccionado = false;
+        for(var i=0; i<opciones.length; i++) {
+          if(opciones[i].checked) {
+            seleccionado = true;
+            break;
+          }
+        }
+        if(!seleccionado) {
+          alert("La modalidad de pago no puede estar en blanco.");
+          return false;
+        }
+        return true;
+      }
+
+      function comprobar_paso_3(){
+
+        return true;
+      }
+
+      /* Funciones para el formulario */
+
+      function comprobarFormulario() {
+
         var matricula =  document.getElementById("f_matricula").value;
         if (matricula == "" ) {
           alert("Por favor, adjunte el justificante solicitado");
