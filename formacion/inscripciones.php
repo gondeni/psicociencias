@@ -861,10 +861,11 @@ include('../includes/config_ini.php');
           }
           break;
           case 1:
-
-          $("#corte_2").hide();
-          $("#corte_3").fadeIn(1000);
-          tab++;
+          if(comprobar_paso_2() == true){
+            $("#corte_2").hide();
+            $("#corte_3").fadeIn(1000);
+            tab++;
+          }
           break;
 
           case 2:
@@ -1085,6 +1086,7 @@ include('../includes/config_ini.php');
         return true;
       }
 
+
       /* Funciones para el formulario */
 
       function comprobarFormulario() {
@@ -1132,21 +1134,21 @@ include('../includes/config_ini.php');
           document.getElementById("botonMatricula").style.display = "block";
         }
       }
-
-      $(function(){
-        $('#boton_envio').on('click', function(e){
-          e.preventDefault();
-
-          var checkboxMarcados = 0;
-          $('.casilla_comprobable').each(function(){
-            if ($(this).prop('checked')) checkboxMarcados ++;
-          });
-          if (checkboxMarcados == 0) alert("Seleccione, al menos, un curso.");
-
-          if (checkboxMarcados > 0) $('#form').submit();
-        });
-      });
-
+      //
+      // $(function(){
+      //   $('#boton_envio').on('click', function(e){
+      //     e.preventDefault();
+      //
+      //     var checkboxMarcados = 0;
+      //     $('.casilla_comprobable').each(function(){
+      //       if ($(this).prop('checked')) checkboxMarcados ++;
+      //     });
+      //     if (checkboxMarcados == 0) alert("Seleccione, al menos, un curso.");
+      //
+      //     if (checkboxMarcados > 0) $('#form').submit();
+      //   });
+      // });
+      //
       </script>
 
 
