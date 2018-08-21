@@ -748,16 +748,11 @@ include('../includes/config_ini.php');
                         <div class="row">
                           <div class="col-md-12">
                             <label>
-                              <input type="checkbox" name="politica" id="politica" value="S" onchange="aceptarPolitica(this.value);">
+                              <input type="checkbox" name="politica" id="politica" value="S">
                               He leído y acepto la <a href="../nosotros/subSeccion.php?mIdDeSubseccion=38" target="_blank">política de privacidad</a>
                             </label>
                           </div>
                         </div>
-
-                        <div id="botonMatricula" style="display:none;">
-                          <button class="btn btn-lg u-btn-primary g-font-weight-600 g-font-size-default rounded-3 text-uppercase g-py-5 g-px-20" id="boton_envio" type="submit" role="button">Reralizar matrícula</button>
-                        </div>
-
                       </div>
                     </div>
                   </div>
@@ -880,7 +875,7 @@ include('../includes/config_ini.php');
             return;
           }
 
-          if(checkboxMarcados > 0){
+          if(checkboxMarcados > 0 && $("#politica").is(':checked')){
             bootbox.confirm({
               message: "Va a enviar el formulario. ¿Está seguro?",
               buttons: {
@@ -1087,23 +1082,6 @@ include('../includes/config_ini.php');
       }
 
 
-      /* Funciones para el formulario */
-
-      function comprobarFormulario() {
-
-        var matricula =  document.getElementById("f_matricula").value;
-        if (matricula == "" ) {
-          alert("Por favor, adjunte el justificante solicitado");
-          return false;
-        }
-        var formatoMatricula =  (matricula.substring(matricula.lastIndexOf("."))).toLowerCase();
-        if (formatoMatricula != ".pdf") {
-          alert("El formato del justificante no es pdf");
-          return false;
-        }
-        return true;
-      }
-
       function datosDomiciliacion(dato){
         if(dato=="P"){
           document.getElementById("datosDomiciliacion").style.display = "block";
@@ -1128,30 +1106,25 @@ include('../includes/config_ini.php');
         }
 
       }
-
-      function aceptarPolitica(dato){
-        if(dato=="S"){
-          document.getElementById("botonMatricula").style.display = "block";
-        }
-      }
-      //
-      // $(function(){
-      //   $('#boton_envio').on('click', function(e){
-      //     e.preventDefault();
-      //
-      //     var checkboxMarcados = 0;
-      //     $('.casilla_comprobable').each(function(){
-      //       if ($(this).prop('checked')) checkboxMarcados ++;
-      //     });
-      //     if (checkboxMarcados == 0) alert("Seleccione, al menos, un curso.");
-      //
-      //     if (checkboxMarcados > 0) $('#form').submit();
-      //   });
-      // });
-      //
-      </script>
+    }
+    //
+    // $(function(){
+    //   $('#boton_envio').on('click', function(e){
+    //     e.preventDefault();
+    //
+    //     var checkboxMarcados = 0;
+    //     $('.casilla_comprobable').each(function(){
+    //       if ($(this).prop('checked')) checkboxMarcados ++;
+    //     });
+    //     if (checkboxMarcados == 0) alert("Seleccione, al menos, un curso.");
+    //
+    //     if (checkboxMarcados > 0) $('#form').submit();
+    //   });
+    // });
+    //
+    </script>
 
 
-    </body>
+  </body>
 
-    </html>
+  </html>

@@ -104,11 +104,11 @@ if ($curso["banner"] != "") {
     margin: auto;
   }
 
-  body #modalPrimario {
-      /* new custom width */
-      width: 800px;
-      margin: auto;
-      /* must be half of the width, minus scrollbar on the left (30px) */
+  @media (min-width: 800px) {
+      .modal-lg {
+          width: 900px;
+          height: 900px; /* control height here */
+      }
   }
 
   </style>
@@ -410,7 +410,7 @@ if ($curso["banner"] != "") {
         </section>
 
         <!-- Modal -->
-        <div class="modal" id="modalPrimario" aria-labelledby="modalLabel" >
+        <div class="modal" id="modalPrimario" tabindex="-1" aria-labelledby="modalLabel" >
           <div class="modal-dialog modal-lg" id="dialogoModal">
             <div class="modal-content">
               <div class="modal-body" id="cuerpoDeModalPrimario">
@@ -503,10 +503,11 @@ if ($curso["banner"] != "") {
                 color: '#FFFFFF'
               },
               position: {
-                corner: {
-                  target: 'center',
-                  tooltip: 'bottomMiddle'
-                }
+                my:'top-left'
+                // corner: {
+                //   target: 'center',
+                //   tooltip: 'bottomMiddle'
+                // }
               }
             });
           },

@@ -14,7 +14,7 @@
 	$id_de_seccion = $_POST["id_de_seccion"];
 	$descripcion_de_curso = $_POST["descripcion_de_curso"];
 	$modalidad_de_curso = $_POST["modalidad_de_curso"];
-	$color_calendario = $_POST["color_calendario"];
+	$color_calendario = $_POST["color"];
 	$id_de_sede = $_POST["id_de_sede"];
 	$sesiones_de_curso = $_POST["sesiones_de_curso"];
 	$fechas_de_curso = $_POST["fechas_de_curso"];
@@ -113,7 +113,9 @@
                     <div class="x_content">
 
 											<?php
-
+											echo "<pre/>";
+											var_dump($_POST);
+											die();
 												/* Se define la consulta SQL */
 												$consulta = "UPDATE cursos SET ";
 
@@ -145,13 +147,15 @@
 
 												$consulta .= "WHERE idDeCurso = :idDeCurso;";
 
+
+
 												$hacerConsulta = $conexion->prepare($consulta); // Se crea un objeto PDOStatement.
 												$hacerConsulta->bindParam(":idDeCurso", $id_de_curso);
 												$hacerConsulta->bindParam(":nombreDeCurso", $nombre_de_curso);
 												$hacerConsulta->bindParam(":idDeSeccion", $id_de_seccion);
 												$hacerConsulta->bindParam(":descripcionDeCurso", $descripcion_de_curso);
 												$hacerConsulta->bindParam(":modalidadDeCurso", $modalidad_de_curso);
-												$hacerConsulta->bindParam(":color_calendario", $modalidad_de_curso);
+												$hacerConsulta->bindParam(":color_calendario", $color_calendario);
 												$hacerConsulta->bindParam(":idDeSede", $id_de_sede);
 												$hacerConsulta->bindParam(":sesionesDeCurso", $sesiones_de_curso);
 												$hacerConsulta->bindParam(":fechasDeCurso", $fechas_de_curso);

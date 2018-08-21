@@ -68,7 +68,7 @@ $hacerConsulta->closeCursor(); // Se libera el recurso.
 	<!-- Custom Theme Style -->
 	<link href="../build/css/custom.min.css" rel="stylesheet">
 
-	<!-- Custom Theme Style -->
+	<!-- Spectrum -->
 	<link href="../vendors/bgrins-spectrum-98454b5/spectrum.css" rel="stylesheet">
 
 	<!-- Ckeditor -->
@@ -166,8 +166,10 @@ $hacerConsulta->closeCursor(); // Se libera el recurso.
 												</div>
 											</div>
 											<div class="item form-group">
-												<label class="control-label col-md-2 col-sm-2 col-xs-12" for="color_calendario">Color calendario:</label>
-												<input type='text' id="color"/>
+												<label class="control-label col-md-2 col-sm-2 col-xs-12" for="color">Color calendario:</label>
+												<div class="control-label col-md-2 col-sm-2 col-xs-12">
+													<input type='text' id="color" name="color"/>
+												</div>
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Sede</label>
@@ -502,8 +504,9 @@ $hacerConsulta->closeCursor(); // Se libera el recurso.
 				showInput: true,
 				className: "full-spectrum",
 				showInitial: true,
-				showPalette: true,
+				showPaletteOnly: true,
 				showSelectionPalette: true,
+				hideAfterPaletteSelect:true,
 				maxSelectionSize: 10,
 				preferredFormat: "hex",
 				localStorageKey: "spectrum.demo",
