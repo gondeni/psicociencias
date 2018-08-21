@@ -91,6 +91,9 @@ if ($curso["banner"] != "") {
   <!-- Fullcalendar -->
   <link rel="stylesheet" href="../assets/fullcalendar-3.9.0/fullcalendar.css">
 
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.css">
+
   <style>
   #loading {
     display: none;
@@ -105,12 +108,23 @@ if ($curso["banner"] != "") {
   }
 
   @media (min-width: 800px) {
-      .modal-lg {
-          width: 900px;
-          height: 900px; /* control height here */
-      }
+    .modal-lg {
+      width: 900px;
+      height: 900px; /* control height here */
+    }
   }
 
+  /* .fc-content {
+    height: 50px !important;
+  } */
+
+  /* #modalPrimario {
+    z-index: 2500;
+  } */
+
+  .fc-month-view span.fc-title{
+    white-space: normal;
+  }
   </style>
 </head>
 
@@ -472,7 +486,6 @@ if ($curso["banner"] != "") {
       // $.HSCore.components.HSTabs.init('[role="tablist"]');
 
       $('#modalPrimario').on('show.bs.modal', function () {
-
         $.ajax({
           type: "POST",
           url: 'php/auxiliar_calendario.php',
@@ -487,7 +500,7 @@ if ($curso["banner"] != "") {
           defaultDate: hoy,
           editable: false,
           navLinks: true, // can click day/week names to navigate views
-          eventLimit: true, // allow "more" link when too many events
+          eventLimit: 1, // allow "more" link when too many events
           eventTextColor: 'white',
           events: {
             url: 'php/get-events.php',
@@ -498,16 +511,16 @@ if ($curso["banner"] != "") {
           eventRender: function(event, element) {
             element.qtip({
               content: event.title,
+              prerender: true,
               style: {
                 background: 'black',
                 color: '#FFFFFF'
               },
               position: {
-                my:'top-left'
-                // corner: {
-                //   target: 'center',
-                //   tooltip: 'bottomMiddle'
-                // }
+                corner: {
+                  target: 'center',
+                  tooltip: 'bottomMiddle'
+                }
               }
             });
           },
