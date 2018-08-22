@@ -472,7 +472,7 @@ if ($curso["banner"] != "") {
 
     <!-- Fullcalendar -->
     <script src="../assets/fullcalendar-3.9.0/lib/moment.min.js"></script>
-    <script src="../assets/fullcalendar-3.9.0/fullcalendar.min.js"></script>
+    <script src="../assets/fullcalendar-3.9.0/fullcalendar.js"></script>
     <script src="../assets/fullcalendar-3.9.0/locale-all.js"></script>
     <script src="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>
 
@@ -480,7 +480,7 @@ if ($curso["banner"] != "") {
     <script>
     $(document).ready(function() {
       var hoy = new Date();
-      hoy =  hoy.getFullYear()+ "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate();
+      // hoy =  hoy.getFullYear()+ "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate();
 
       // initialization of tabs
       // $.HSCore.components.HSTabs.init('[role="tablist"]');
